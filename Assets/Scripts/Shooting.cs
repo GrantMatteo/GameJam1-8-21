@@ -44,7 +44,6 @@ public class Shooting : MonoBehaviour
     {
         playerTransform.position = bulletInstance.GetComponent<Transform>().position;
         playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;
-        Debug.Log("aewfaewf" + bulletInstance.GetComponent<Rigidbody2D>().velocity);
         Destroy(bulletInstance);
     }
 }
