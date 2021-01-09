@@ -7,19 +7,12 @@ public class Enemy : MonoBehaviour {
 
     //we'll probably need some Collision events with bullets to increase score and stuff
     private void OnTriggerEnter2D(Collider2D collision) {
-
-
-        if (collision.gameObject.tag == "Bullet")
-        {
+        if (collision.gameObject.tag == "Bullet") {
             //TODO increase score
             Damage(1);
         }
     }
-    private void OnCollisionExit2D(Collision2D collision) {
-
-    }
-    public void Die()
-    {
+    public void Die() {
         Destroy(this.gameObject);
     }
 
