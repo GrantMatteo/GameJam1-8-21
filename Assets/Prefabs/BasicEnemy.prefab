@@ -47,9 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e503ede46f6e8439bbeb196bcd316346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followStrength: 1600
-  maxSpeed: 110
-  maxMaxSpeed: 150
+  followStrength: 15000
+  maxSpeed: 100
 --- !u!212 &4181317229205165849
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  pointValue: 1
 --- !u!50 &4181317229205165851
 Rigidbody2D:
   serializedVersion: 4

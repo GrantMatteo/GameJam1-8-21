@@ -17,7 +17,6 @@ public class ScoreCounter : MonoBehaviour
     public void addScore(float modifier)
     {
         score = score + modifier;
-        print(modifier);
     }
 
     public void setScore(float newValue)

@@ -27,21 +27,46 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(up))
+        if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
             rb.AddForce(transform.up * acceleration);
+            print("up");
         }
-        if (Input.GetKey(down))
+        if (Input.GetKey(up) && Input.GetKey(right))
+        {
+            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f));
+            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)));
+        }
+        if (Input.GetKey(up) && Input.GetKey(left)){
+            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f));
+            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f));
+        }
+        if (Input.GetKey(down) && !(Input.GetKey(left)| Input.GetKey(right)))
         {
             rb.AddForce(-transform.up * acceleration);
+            print("down");
         }
-        if (Input.GetKey(right))
+        if (Input.GetKey(down) && Input.GetKey(right))
+        {
+            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f));
+            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)));
+        }
+        if (Input.GetKey(down) && Input.GetKey(left))
+        {
+            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f));
+            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f));
+        }
+        if (Input.GetKey(right) && !(Input.GetKey(up) | Input.GetKey(down)))
         {
             rb.AddForce(transform.right * acceleration);
         }
-        if (Input.GetKey(left))
+        if (Input.GetKey(left) && !(Input.GetKey(up) | Input.GetKey(down)))
         {
             rb.AddForce(-transform.right * acceleration);
+        }
+        if(Input.GetKey(left) && Input.GetKey(up))
+        {
+            print("test");
         }
     }
 }
