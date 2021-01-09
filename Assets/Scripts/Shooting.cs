@@ -14,7 +14,8 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject playerTransform = GetComponent<Transform>();
+
+        playerTransform = GetComponent<Transform>();
         playerRB = GetComponent<Rigidbody2D>();
     }
 
