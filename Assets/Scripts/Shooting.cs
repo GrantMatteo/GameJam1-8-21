@@ -6,15 +6,16 @@ public class Shooting : MonoBehaviour
 {
     public float bulletSpeed = 10;
     public GameObject bullet;
-    public Transform playerTransform;
-
+    private Transform playerTransform;
+    private Rigidbody2D playerRB;
 
     bool hasBullet = true; //do we have the bullet on us?
     private GameObject bulletInstance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerTransform = GetComponent<Transform>();
+        playerRB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,10 @@ public class Shooting : MonoBehaviour
         {
             fireTowardsMouse();
             hasBullet = false;
+        } else if (Input.GetMouseButtonDown(1) && !hasBullet)
+        {
+            teleportToBullet();
+            hasBullet = true;
         }
     }
 
@@ -34,5 +39,12 @@ public class Shooting : MonoBehaviour
         velDirection.Normalize();
         bulletInstance = Instantiate(bullet, playerTransform.position, playerTransform.rotation);
         bulletInstance.GetComponent<Rigidbody2D>().velocity = velDirection * bulletSpeed;
+    }
+    void teleportToBullet()
+    {
+        playerTransform.position = bulletInstance.GetComponent<Transform>().position;
+        playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;
+        Debug.Log("aewfaewf" + bulletInstance.GetComponent<Rigidbody2D>().velocity);
+        Destroy(bulletInstance);
     }
 }
