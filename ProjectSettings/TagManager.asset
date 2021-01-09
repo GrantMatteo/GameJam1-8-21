@@ -45,3 +45,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 3232647309
+    locked: 0
+  - name: Low
+    uniqueID: 73380363
+    locked: 0
+  - name: Mid
+    uniqueID: 3782599571
+    locked: 0
+  - name: High
+    uniqueID: 261058865
+    locked: 0
