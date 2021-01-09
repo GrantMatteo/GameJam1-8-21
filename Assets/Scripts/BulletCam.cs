@@ -11,12 +11,17 @@ public class BulletCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.gameObject.SetActive(false);
         cam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bullet == null)
+        {
+            return;
+        }
         Vector3 pointOnScreen = mainCam.WorldToScreenPoint(bullet.transform.position);
         if ((pointOnScreen.x < 0) || (pointOnScreen.x > Screen.width) ||
         (pointOnScreen.y < 0) || (pointOnScreen.y > Screen.height))

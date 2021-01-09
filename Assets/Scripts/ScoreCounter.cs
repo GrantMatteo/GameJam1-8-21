@@ -11,7 +11,7 @@ public class ScoreCounter : MonoBehaviour
 
     void Start()
     {
-        textBox.text = score.ToString();
+        textBox.text = "Score: " + Mathf.Round(score).ToString();
     }
 
     public void addScore(float modifier)
@@ -33,6 +33,6 @@ public class ScoreCounter : MonoBehaviour
     void Update()
     {
         score += Time.deltaTime;
-        textBox.text = Mathf.Round(score).ToString();
+        textBox.text = "Score: " + Mathf.Round(score).ToString();
     }
 }

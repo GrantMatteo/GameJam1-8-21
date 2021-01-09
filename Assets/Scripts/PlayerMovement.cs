@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,12 +18,13 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode right = KeyCode.D;
     public KeyCode powerupUse = KeyCode.Space;
     [Header("Player Params")]
-    public float health = 3f;
+    public float health = 6f;
+    public Text healthbar;
 
 
 
     [Header("Movement Params")]
-    public float acceleration = 1;
+    public float acceleration = 150;
     public float maxSpeed = 10;
 
 
@@ -78,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             usePowerup();
         }
+        healthbar.text = "Health: " + health.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -126,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Die()
     {
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     void Damage(float amount)
@@ -135,7 +139,8 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
             Die();
-           // Time.timeScale = 0;
+            SceneManager.LoadScene("Menu");
+            //Time.timeScale = 0;
         }
     }
 }

@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Grant Testing.unity
-    guid: 01bfc2b4435b61f4bbc63e1efcf6ca00
+    path: Assets/Scenes/Menu.unity
+    guid: 3ea7a420fa8a3a94bb86467ffb7ea3fd
+  - enabled: 1
+    path: Assets/Scenes/Forrest Testing.unity
+    guid: 3fda2c5ab594c8e46815c1e25b05315c
   - enabled: 1
     path: Assets/Scenes/Ricardo.unity
     guid: 5b97ddede7c2f7a4e80b55db28256b30
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b9c8a08c3c4b553409118c4c8c09ffb6
   m_configObjects: {}
