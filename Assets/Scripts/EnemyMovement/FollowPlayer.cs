@@ -6,7 +6,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour {
     private GameObject player;
     public float followStrength = 60f;
-    public float maxSpeed = 100f;
+    public float maxSpeed = 1.0000000001f;
     public float maxMaxSpeed = 150f;
     private Rigidbody2D rb;
     private void Awake() {
@@ -18,9 +18,11 @@ public class FollowPlayer : MonoBehaviour {
         Vector2 steering = towardPlayer.normalized;
         Vector2 force = steering * followStrength * Time.deltaTime;
         rb.AddForce(force);
-//        if (rb.velocity.magnitude > maxSpeed) {
-//        rb.velocity = rb.velocity.normalized * maxSpeed;
-//       }
+        followStrength = followStrength * maxSpeed;
+        //print(followStrength);
+        //        if (rb.velocity.magnitude > maxSpeed) {
+        //        rb.velocity = rb.velocity.normalized * maxSpeed;
+        //       }
 
     }
 }

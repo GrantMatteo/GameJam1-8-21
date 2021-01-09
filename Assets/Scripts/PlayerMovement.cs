@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float health = 3f;
 
     [Header("Movement Params")]
-    public float acceleration = 1;
+    public float acceleration = 150;
     public float maxSpeed = 10;
 
 
@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(-transform.right * acceleration);
         }
+        print(acceleration);
     }
 
 
