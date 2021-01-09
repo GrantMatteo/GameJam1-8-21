@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     public float health = 10f;
+    public float pointValue = 1;
+    public GameObject scoreDisplay;
 
-    //we'll probably need some Collision events with bullets to increase score and stuff
     private void OnTriggerEnter2D(Collider2D collision) {
 
 
         if (collision.gameObject.tag == "Bullet")
         {
-            //TODO increase score
             Damage(1);
+            scoreDisplay.SendMessage("addScore", pointValue);
         }
     }
     private void OnCollisionExit2D(Collision2D collision) {

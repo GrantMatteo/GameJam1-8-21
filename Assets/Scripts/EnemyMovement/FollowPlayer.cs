@@ -15,10 +15,12 @@ public class FollowPlayer : MonoBehaviour {
     }
     private void Update() {
         Vector2 towardPlayer = player.transform.position - transform.position;
-        Vector2 steering = (towardPlayer - rb.velocity).normalized;
-        rb.AddForce(steering * followStrength * Time.deltaTime);
-        if (rb.velocity.magnitude > maxSpeed) {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
+        Vector2 steering = towardPlayer.normalized - rb.velocity.normalized;
+        Vector2 force = steering * followStrength * Time.deltaTime;
+        rb.AddForce(force);
+//        if (rb.velocity.magnitude > maxSpeed) {
+//        rb.velocity = rb.velocity.normalized * maxSpeed;
+//       }
+
     }
 }
