@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
 
-    
+    [Header("Player Params")]
+    public float health = 3f;
+
     [Header("Movement Params")]
     public float acceleration = 1;
     public float maxSpeed = 10;
@@ -30,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
             rb.AddForce(transform.up * acceleration);
-            print("up");
         }
         if (Input.GetKey(up) && Input.GetKey(right))
         {
@@ -44,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(down) && !(Input.GetKey(left)| Input.GetKey(right)))
         {
             rb.AddForce(-transform.up * acceleration);
-            print("down");
         }
         if (Input.GetKey(down) && Input.GetKey(right))
         {
@@ -64,9 +64,30 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(-transform.right * acceleration);
         }
-        if(Input.GetKey(left) && Input.GetKey(up))
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("Bump");
+        if (collision.gameObject.tag == "Enemy")
         {
-            print("test");
+            Damage(1);
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
+
+    void Damage(float amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            Die();
+            Time.timeScale = 0;
         }
     }
 }

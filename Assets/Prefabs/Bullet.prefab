@@ -3,8 +3,7 @@
 --- !u!1 &8268497144257685685
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5204012763290859736, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -24,8 +23,7 @@ GameObject:
 --- !u!4 &4376116055026920416
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 7447828138616996766, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268497144257685685}
@@ -40,8 +38,7 @@ Transform:
 --- !u!212 &4981057716101498763
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6642272119784832553, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268497144257685685}
@@ -92,8 +89,7 @@ SpriteRenderer:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 9087108335925966988, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268497144257685685}
@@ -109,12 +105,11 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &7933168928750902220
 PolygonCollider2D:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 7089583341172803631, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268497144257685685}
@@ -146,8 +141,7 @@ PolygonCollider2D:
 --- !u!114 &7340312630258809564
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3547730662392873806, guid: eb2ca303a9474e24e87768313638268f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268497144257685685}
@@ -156,8 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5074a764beac1884995d8c69bcc8af49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletTrigger: {fileID: 8936119820092175092, guid: 90cad24838211d3419918ea6985c873c,
-    type: 3}
 --- !u!1 &9110517085139757182
 GameObject:
   m_ObjectHideFlags: 0

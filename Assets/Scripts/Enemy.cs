@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    public float health = 10f;
+    public float health = 1f;
     public float pointValue = 1;
-    void Start()
-    {
-    }
+
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -17,6 +15,10 @@ public class Enemy : MonoBehaviour {
 
             GameObject scoreDisplay = GameObject.FindWithTag("Score");
             scoreDisplay.SendMessage("addScore", pointValue);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            Damage(1);
         }
     }
     public void Die() {
