@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        Destroy(this.gameObject);
+        //this.gameObject.SetActive(false);
     }
 
     void Damage(float amount)
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            Time.timeScale = 0;
+           // Time.timeScale = 0;
         }
     }
 }
