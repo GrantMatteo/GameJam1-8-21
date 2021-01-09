@@ -12,9 +12,9 @@ public class ButtonHandler : MonoBehaviour
         Text txt = transform.Find("Text").GetComponent<Text>();
         txt.text = text;
     }
-    public void LoadLevel(string Level)
+    public void LoadLevel(string level)
     {
         // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
-        SceneManager.LoadScene("Untitled");
+        SceneManager.LoadScene(level);
     }
 }
