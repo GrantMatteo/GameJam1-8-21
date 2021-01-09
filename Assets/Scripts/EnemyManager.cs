@@ -42,7 +42,6 @@ public class EnemyManager : MonoBehaviour
     {
         Debug.Log(curDelay + " " + curIntensity);
         List<GameObject> waveEnemies = new List<GameObject>();
-        Debug.Log("spawning wave");
         for (int i = 0; i < curIntensity;)
         {
             int rand = Random.Range(0, enemies.Count-1);

@@ -7,7 +7,7 @@ public class FollowPlayer : MonoBehaviour {
     private GameObject player;
     public float followStrength = 60f;
     public float maxSpeed = 100f;
-
+    public float maxMaxSpeed = 150f;
     private Rigidbody2D rb;
     private void Awake() {
         player = GameObject.Find("Player");
@@ -15,10 +15,8 @@ public class FollowPlayer : MonoBehaviour {
     }
     private void Update() {
         Vector2 towardPlayer = player.transform.position - transform.position;
-        Vector2 steering = (towardPlayer - rb.velocity).normalized;
+        Vector2 steering = towardPlayer.normalized;
         rb.AddForce(steering * followStrength * Time.deltaTime);
-        if (rb.velocity.magnitude > maxSpeed) {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
+        
     }
 }
