@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Necessary Objects")]
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     [Header("Controls")]
     public KeyCode up = KeyCode.W;
     public KeyCode down = KeyCode.S;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
