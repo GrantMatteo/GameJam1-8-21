@@ -12,10 +12,6 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    private void OnCollisionExit2D(Collision2D collision) {
-
-    }
-
     void Damage(float amount) {
         health -= amount;
         if (health <= 0) {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 306010007600681301}
   - component: {fileID: 306010007600681300}
   - component: {fileID: 1887169039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followStrength: 60
+  maxSpeed: 100
 --- !u!212 &306010007600681302
 SpriteRenderer:
   m_ObjectHideFlags: 0
