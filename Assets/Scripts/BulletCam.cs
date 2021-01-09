@@ -31,7 +31,7 @@ public class BulletCam : MonoBehaviour
      
 
 
-        if (this.gameObject.active)
+        if (this.gameObject.activeSelf)
         {
             transform.position = bullet.transform.position + new Vector3(0, 0, -1);
         }
@@ -45,34 +45,39 @@ public class BulletCam : MonoBehaviour
     public void indicateOffScreen()
     {
         arrowInd.SetActive(true);
-        Vector3 pointOnScreen = mainCam.WorldToScreenPoint(bullet.transform.position);
+        Vector3 pointOnScreen = mainCam.WorldToScreenPoint(bullet.transform.position) - new Vector3(Screen.width, Screen.height, 0)/2;
         float angle = Mathf.Atan2(pointOnScreen.y, pointOnScreen.x);
-        Debug.Log("");
-        angle = ((angle % (Mathf.PI * 2)) + (Mathf.PI * 2)) % (Mathf.PI * 2); //normalize
+        
+        angle = angle % (Mathf.PI * 2); //normalize
+        angle = angle < 0 ? angle + Mathf.PI * 2 : angle;
+
         float separatorAngle = Mathf.Atan2(Screen.height, Screen.width);
-        Vector2 drawBounds = .9F * new Vector2(Screen.width, Screen.height);
+        Vector2 drawBounds = .45F * new Vector2(Screen.width, Screen.height);
         float slope = pointOnScreen.y / pointOnScreen.x;
+     
         if (angle >= separatorAngle && angle <= Mathf.PI - separatorAngle ) //top side
         {
-            arrowInd.transform.position = new Vector2(drawBounds.y / slope, drawBounds.y);    
+            arrowInd.transform.position = mainCam.ScreenToWorldPoint(new Vector3(drawBounds.y / slope, drawBounds.y, 1) + new Vector3(Screen.width, Screen.height, 0) / 2);    
         } 
         else if (angle >= Mathf.PI - separatorAngle && angle <= Mathf.PI + separatorAngle) // left side
         {
-            arrowInd.transform.position = new Vector2(-drawBounds.x, -drawBounds.x * slope);
+            arrowInd.transform.position = mainCam.ScreenToWorldPoint(new Vector3(-drawBounds.x, -drawBounds.x * slope, 1) + new Vector3(Screen.width, Screen.height, 0) / 2);
 
         }
         else if (angle >= Mathf.PI + separatorAngle && angle <= 2*Mathf.PI - separatorAngle) // bottom side
         {
-            arrowInd.transform.position = new Vector2(-drawBounds.y / slope, -drawBounds.y);
+            arrowInd.transform.position = mainCam.ScreenToWorldPoint(new Vector3(-drawBounds.y / slope, -drawBounds.y, 1) + new Vector3(Screen.width, Screen.height, 0) / 2);
         }
         else //right side
         {
-            arrowInd.transform.position = new Vector2(drawBounds.x, drawBounds.x * slope);
-
+            arrowInd.transform.position = mainCam.ScreenToWorldPoint(new Vector3(drawBounds.x, drawBounds.x * slope, 0) + new Vector3(Screen.width, Screen.height, 0) / 2);
         }
+        arrowInd.transform.position = new Vector3(arrowInd.transform.position.x, arrowInd.transform.position.y, 0);
+        arrowInd.transform.rotation = Quaternion.Euler(0,0,angle*Mathf.Rad2Deg);
     }
     void Deactiv()
     {
+        arrowInd.SetActive(false);
         this.cam.enabled = false;
     }
 }
