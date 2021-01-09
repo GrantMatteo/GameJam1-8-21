@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Score
   - Giblet
+  - Powerup
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Bullet Trigger
   - Player
   - Giblet
-  - 
+  - Indicator
   - 
   - 
   - 

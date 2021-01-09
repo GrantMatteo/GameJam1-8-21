@@ -40,7 +40,6 @@ public class EnemyManager : MonoBehaviour
     }
     void SpawnWave() 
     {
-        Debug.Log(curDelay + " " + curIntensity);
         List<GameObject> waveEnemies = new List<GameObject>();
         for (int i = 0; i < curIntensity;)
         {

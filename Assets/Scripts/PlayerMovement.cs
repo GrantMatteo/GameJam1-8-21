@@ -6,23 +6,33 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Necessary Objects")]
     private Rigidbody2D rb;
+    public GameObject bearTrap;
+    public GameObject screenClearer;
+
     [Header("Controls")]
     public KeyCode up = KeyCode.W;
     public KeyCode down = KeyCode.S;
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
-
+    public KeyCode powerupUse = KeyCode.Space;
     [Header("Player Params")]
     public float health = 3f;
+
+
 
     [Header("Movement Params")]
     public float acceleration = 1;
     public float maxSpeed = 10;
 
 
+    PowerupType[] heldPowerup = new PowerupType[1];
+
+    PowerupType activePowerup;
+
     // Start is called before the first frame update
     void Start()
     {
+        heldPowerup[0] = PowerupType.NONE;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -64,18 +74,56 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(-transform.right * acceleration);
         }
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        print("Bump");
-        if (collision.gameObject.tag == "Enemy")
+        if (Input.GetKey(powerupUse) && heldPowerup[0] != PowerupType.NONE)
         {
-            Damage(1);
+            usePowerup();
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Bump");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Damage(1);
+        } else if (collision.gameObject.tag == "Powerup")
+        {
+            if (heldPowerup[0] == PowerupType.NONE)
+            {
+                collision.gameObject.SendMessage("Pickup", heldPowerup);
+                Debug.Log(heldPowerup[0]);
+            }
+        }
+    }
+    void usePowerup()
+    {
+        switch (heldPowerup[0])
+        {
+            case PowerupType.HEALTH:
+                health++;
+                break;
+            case PowerupType.MASSIVE_BULLET:
+                activePowerup = heldPowerup[0];
+                break;
+            case PowerupType.CLEAR_SCREEN:
+                clearScreen();
+                break;
+            case PowerupType.BEAR_TRAP:
+                throwBearTrap();
+                break;
+            
+        }
+    }
+    void clearScreen()
+    {
+        Instantiate(screenClearer, this.transform.position, this.transform.rotation);
+
+    }
+    void throwBearTrap()
+    {
+        Instantiate(bearTrap, this.transform.position, this.transform.rotation);
+
+    }
     public void Die()
     {
         //this.gameObject.SetActive(false);
