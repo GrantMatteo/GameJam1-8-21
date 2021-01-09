@@ -5,7 +5,6 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     
-    public GameObject bulletTrigger;
 
     private GameObject child;
     // Start is called before the first frame update
