@@ -130,21 +130,21 @@ public static class ExtensionMethods
             {
                 foreach (Transform child in g.transform)
                 {
-                    components.Concat(child.GetComponentsInChildren<T>());
+                    components.AddOrConcat(child.GetComponentsInChildren<T>());
+                    
                 }
             }
             if (in_parent)
-                components.Concat(g.transform.parent.GetComponentsInParent<T>());
-
+                components.AddOrConcat(g.transform.parent.GetComponentsInParent<T>());
             return components.ToArray();
         }
 
         if (!in_children && !in_parent)
             return g.GetComponents<T>();
         if (in_children)
-            components.Concat(g.GetComponentsInChildren<T>());
+            components.AddOrConcat(g.GetComponentsInChildren<T>());
         if (in_parent && g.transform.parent)
-            components.Concat(g.transform.parent.GetComponentsInParent<T>());
+            components.AddOrConcat(g.transform.parent.GetComponentsInParent<T>());
 
         GameObject current = g;
         GameObject last = g;
@@ -153,7 +153,7 @@ public static class ExtensionMethods
             current = current.transform.parent.gameObject;
             if (!current)
                 break;
-            components.Concat(current.GetComponentsInChildren<T>());
+            components.AddOrConcat(current.GetComponentsInChildren<T>());
             sibling_depth--;
         }
 
@@ -176,6 +176,19 @@ public static class ExtensionMethods
             Random.Range(bounds.min.y, bounds.max.y),
             Random.Range(bounds.min.z, bounds.max.z)
         );
+    }
+
+    public static bool AddOrConcat<T>(this HashSet<T> set, IEnumerable<T> enumerable)
+    {
+        List<T> list = new List<T>(enumerable);
+        if (list.Count == 1)
+            return set.Add(list[0]);
+        else if (list.Count > 1)
+        {
+            enumerable.Concat(enumerable);
+            return true;
+        }
+        return false;
     }
 }
 
