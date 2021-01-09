@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  pointValue: 1
+  pointValue: 10
 --- !u!50 &4181317229205165851
 Rigidbody2D:
   serializedVersion: 4
