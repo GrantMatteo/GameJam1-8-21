@@ -20,6 +20,7 @@ public class Powerup : MonoBehaviour
     {
         pType[0] = powerupType;
         Destroy(this.gameObject);
+        
     }
 }
 public enum PowerupType
