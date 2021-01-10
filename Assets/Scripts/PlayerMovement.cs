@@ -49,40 +49,44 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
-        if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
+        if (!firing)
         {
-            rb.AddForce(transform.up * acceleration * Time.deltaTime);
-        }
-        if (Input.GetKey(up) && Input.GetKey(right))
-        {
-            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
-        }
-        if (Input.GetKey(up) && Input.GetKey(left)){
-            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-        }
-        if (Input.GetKey(down) && !(Input.GetKey(left)| Input.GetKey(right)))
-        {
-            rb.AddForce(-transform.up * acceleration * Time.deltaTime);
-        }
-        if (Input.GetKey(down) && Input.GetKey(right))
-        {
-            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
-        }
-        if (Input.GetKey(down) && Input.GetKey(left))
-        {
-            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-        }
-        if (Input.GetKey(right) && !(Input.GetKey(up) | Input.GetKey(down)))
-        {
-            rb.AddForce(transform.right * acceleration * Time.deltaTime);
-        }
-        if (Input.GetKey(left) && !(Input.GetKey(up) | Input.GetKey(down)))
-        {
-            rb.AddForce(-transform.right * acceleration * Time.deltaTime);
+            if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
+            {
+                rb.AddForce(transform.up * acceleration * Time.deltaTime);
+            }
+            if (Input.GetKey(up) && Input.GetKey(right))
+            {
+                rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+                rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
+            }
+            if (Input.GetKey(up) && Input.GetKey(left))
+            {
+                rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+                rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            }
+            if (Input.GetKey(down) && !(Input.GetKey(left) | Input.GetKey(right)))
+            {
+                rb.AddForce(-transform.up * acceleration * Time.deltaTime);
+            }
+            if (Input.GetKey(down) && Input.GetKey(right))
+            {
+                rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+                rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
+            }
+            if (Input.GetKey(down) && Input.GetKey(left))
+            {
+                rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+                rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            }
+            if (Input.GetKey(right) && !(Input.GetKey(up) | Input.GetKey(down)))
+            {
+                rb.AddForce(transform.right * acceleration * Time.deltaTime);
+            }
+            if (Input.GetKey(left) && !(Input.GetKey(up) | Input.GetKey(down)))
+            {
+                rb.AddForce(-transform.right * acceleration * Time.deltaTime);
+            }
         }
         if (Input.GetKey(powerupUse) && heldPowerup[0] != PowerupType.NONE)
         {
@@ -179,6 +183,11 @@ public class PlayerMovement : MonoBehaviour
         }
         powerupDisplay.SendMessage("SetImage", PowerupType.NONE);
         heldPowerup[0] = PowerupType.NONE;
+    }
+    bool firing = false;
+    void SetFiring(bool fi)
+    {
+        firing = fi;
     }
     void clearScreen()
     {

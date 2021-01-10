@@ -20,6 +20,7 @@ public class BulletCam : MonoBehaviour
     {
         if (bullet == null)
         {
+            Deactiv();
             return;
         }
         Vector3 pointOnScreen = mainCam.WorldToScreenPoint(bullet.transform.position);
