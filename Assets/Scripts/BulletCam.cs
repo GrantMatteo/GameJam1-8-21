@@ -18,6 +18,7 @@ public class BulletCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("upating");
         if (bullet == null)
         {
             return;
@@ -43,6 +44,7 @@ public class BulletCam : MonoBehaviour
     }
     void SetBullet(GameObject o)
     {
+        Debug.Log("setbullet" + this.gameObject.activeSelf);
         bullet = o;
     }
 
@@ -80,7 +82,7 @@ public class BulletCam : MonoBehaviour
         arrowInd.transform.position = new Vector3(arrowInd.transform.position.x, arrowInd.transform.position.y, 0);
         arrowInd.transform.rotation = Quaternion.Euler(0,0,angle*Mathf.Rad2Deg);
     }
-    void Deactiv()
+    public void Deactiv()
     {
         arrowInd.SetActive(false);
         this.cam.enabled = false;
