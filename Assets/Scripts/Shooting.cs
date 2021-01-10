@@ -66,9 +66,8 @@ public class Shooting : MonoBehaviour
     {
         Debug.Log("Bullet cam" + bulletCam);
         bulletCam.SendMessage("Deactiv");
-        bulletCam.SetActive(false);
-        playerTransform.position = bulletInstance.GetComponent<Transform>().position;
-        playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;
         Destroy(bulletInstance);
+        playerTransform.position = bulletInstance.GetComponent<Transform>().position;
+        playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;        
     }
 }

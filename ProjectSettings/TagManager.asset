@@ -9,6 +9,8 @@ TagManager:
   - Score
   - Giblet
   - Powerup
+  - Wall
+  - View Sector
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - Player
   - Giblet
   - Indicator
-  - 
-  - 
+  - Viewbox
+  - ViewSector
   - 
   - 
   - 
