@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d00c530e5a99a842ab4fb7fe6e65a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallCollisionsUntilExpiry: 2
+  lifetimeUntilExpiry: 700
 --- !u!1 &9110517085139757182
 GameObject:
   m_ObjectHideFlags: 0

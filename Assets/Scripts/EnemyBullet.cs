@@ -3,9 +3,10 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour {
 
     private int wallCollisions = 0;
+    private int lifetimeLeft;
 
-    public int wallCollisionsUntilExpiry = 2;
-    //public int lifetimeUntilExpiry = 3000;
+    public int wallCollisionsUntilExpiry;
+    public int lifetimeUntilExpiry;
 
     private EnemyShootingComponent enemyShootingComponent;
 
@@ -21,9 +22,24 @@ public class EnemyBullet : MonoBehaviour {
             wallCollisions++;
         }
         if (wallCollisions == wallCollisionsUntilExpiry) {
-            enemyShootingComponent.addAmmo();
-            wallCollisions = 0; // does this do anything?
-            Destroy(this.gameObject);
+            die();
+        }
+    }
+
+    private void die() {
+        enemyShootingComponent.addAmmo();
+        wallCollisions = 0; // does this do anything?
+        Destroy(this.gameObject);
+    }
+
+    void Start() {
+        lifetimeLeft = lifetimeUntilExpiry;
+    }
+
+    void Update() {
+        lifetimeLeft--;
+        if (lifetimeLeft == 0) {
+            die();
         }
     }
 
