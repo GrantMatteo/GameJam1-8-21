@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
        
     }
-
+    public GameObject powerupDisplay;
     //changing this to public to see if it changes anything with interactionobject
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             if (heldPowerup[0] == PowerupType.NONE)
             {
                 collision.gameObject.SendMessage("Pickup", heldPowerup);
-                Debug.Log(heldPowerup[0]);
+                powerupDisplay.SendMessage("SetImage", heldPowerup[0]);
             }
         }
         if(collision.CompareTag("InteractionObject"))
@@ -177,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
                 throwBearTrap();
                 break;
         }
+        powerupDisplay.SendMessage("SetImage", PowerupType.NONE);
         heldPowerup[0] = PowerupType.NONE;
     }
     void clearScreen()
