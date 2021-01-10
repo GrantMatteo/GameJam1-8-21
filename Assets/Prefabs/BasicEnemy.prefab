@@ -1141,7 +1141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6152721587002040558
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,8 +1684,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -512367725
-  m_SortingLayer: 3
+  m_SortingLayerID: 261058865
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 784ff7c0799ebd44baeb31fe2d3b7326, type: 3}
   m_Color: {r: 0.8867924, g: 0.8867924, b: 0.6148985, a: 1}
@@ -2079,8 +2079,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -512367725
-  m_SortingLayer: 3
+  m_SortingLayerID: 261058865
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 81ddd5dbdbf0eef41a63b5f699d4e63e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2109,7 +2109,7 @@ GameObject:
   - component: {fileID: 4847848383019911539}
   - component: {fileID: 4968633731531772417}
   m_Layer: 8
-  m_Name: BasicEnemy 1
+  m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2239,7 +2239,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9173808452271208238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 92a414b938ffe0b4585d61b17f91f442, type: 2}
   m_CullingMode: 0
