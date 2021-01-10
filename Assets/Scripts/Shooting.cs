@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,6 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         playerTransform = GetComponent<Transform>();
         playerRB = GetComponent<Rigidbody2D>();
     }
@@ -29,7 +28,8 @@ public class Shooting : MonoBehaviour
         {
             fireTowardsMouse();
             hasBullet = false;
-        } else if (Input.GetMouseButtonDown(1) && !hasBullet)
+        }
+        else if (Input.GetMouseButtonDown(1) && !hasBullet)
         {
             teleportToBullet();
             hasBullet = true;
@@ -42,9 +42,10 @@ public class Shooting : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 velDirection = mousePos - new Vector2(playerTransform.position.x, playerTransform.position.y);
         velDirection.Normalize();
-        
+
         bulletInstance = Instantiate(bullet, playerTransform.position, playerTransform.rotation);
-        switch (bulletPowerup) {
+        switch (bulletPowerup)
+        {
             case PowerupType.MASSIVE_BULLET:
                 bulletInstance.transform.localScale *= 5;
                 bulletInstance.GetComponent<Collider2D>().enabled = false;
@@ -66,8 +67,9 @@ public class Shooting : MonoBehaviour
     {
         Debug.Log("Bullet cam" + bulletCam);
         bulletCam.SendMessage("Deactiv");
-        Destroy(bulletInstance);
+        bulletCam.SetActive(false);
         playerTransform.position = bulletInstance.GetComponent<Transform>().position;
-        playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;        
+        playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;
+        Destroy(bulletInstance);
     }
 }
