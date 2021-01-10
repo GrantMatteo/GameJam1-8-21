@@ -23,9 +23,9 @@ public class FollowPlayer : MonoBehaviour {
         float dist = towardPlayer.magnitude;
 
         if (shootingComponent != null) {
-            if (dist < 7) {
+            if (dist < 4) {
                 force *= -1; // puts distance
-            } else if (dist < 10) {
+            } else if (dist < 7) {
                 force = Vector2.zero; // maintains distance
                 shootingComponent.SendMessage(nameof(EnemyShootingComponent.setActiveShooter), true);
             } else {
