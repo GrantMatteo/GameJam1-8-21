@@ -26,8 +26,8 @@ TagManager:
   - Indicator
   - BouncyTree
   - NonBouncyTree
-  - 
-  - 
+  - CameraBox
+  - WorldBox
   - 
   - 
   - 

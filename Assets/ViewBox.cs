@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ViewBox : MonoBehaviour
 {
-    int inCount = 0;
+    public int inCount = 0;
     // Start is called before the first frame update
     void Start()
     {
