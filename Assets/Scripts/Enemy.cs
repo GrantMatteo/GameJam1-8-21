@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour {
         if (collision.gameObject.tag == "Bullet")
         {
             Damage(1);
-
             GameObject scoreDisplay = GameObject.FindWithTag("Score");
             scoreDisplay.SendMessage("addScore", pointValue);
         }
