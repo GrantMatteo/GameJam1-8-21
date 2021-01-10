@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject bearTrap;
     public GameObject screenClearer;
-    public Animator animator;
+    Animator animator;
 
     [Header("Controls")]
     public KeyCode up = KeyCode.W;
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Params")]
     public float acceleration = 150;
     public float maxSpeed = 10;
+    float animSpeedMultiplier = 10f;
 
 
 
@@ -42,49 +43,50 @@ public class PlayerMovement : MonoBehaviour
     {
         heldPowerup[0] = PowerupType.NONE;
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
-        animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
         float acceleration = this.acceleration * (firing ? .5F : 1F);  
+        //animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
+        //animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
+        animator.speed = (rb.velocity.magnitude / maxSpeed) * animSpeedMultiplier;
         if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
-            rb.AddForce(transform.up * acceleration * Time.deltaTime);
+            rb.AddForce(Vector2.up * acceleration * Time.deltaTime);
         }
         if (Input.GetKey(up) && Input.GetKey(right))
         {
-            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
+            rb.AddForce(Vector2.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            rb.AddForce(Vector2.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
         }
-        if (Input.GetKey(up) && Input.GetKey(left))
-        {
-            rb.AddForce(transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+        if (Input.GetKey(up) && Input.GetKey(left)){
+            rb.AddForce(Vector2.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            rb.AddForce(-Vector2.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
         }
         if (Input.GetKey(down) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
-            rb.AddForce(-transform.up * acceleration * Time.deltaTime);
+            rb.AddForce(-Vector2.up * acceleration * Time.deltaTime);
         }
         if (Input.GetKey(down) && Input.GetKey(right))
         {
-            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(transform.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
+            rb.AddForce(-Vector2.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            rb.AddForce(Vector2.right * acceleration * (Mathf.Sqrt(0.5f)) * Time.deltaTime);
         }
         if (Input.GetKey(down) && Input.GetKey(left))
         {
-            rb.AddForce(-transform.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
-            rb.AddForce(-transform.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            rb.AddForce(-Vector2.up * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
+            rb.AddForce(-Vector2.right * acceleration * Mathf.Sqrt(0.5f) * Time.deltaTime);
         }
         if (Input.GetKey(right) && !(Input.GetKey(up) | Input.GetKey(down)))
         {
-            rb.AddForce(transform.right * acceleration * Time.deltaTime);
+            rb.AddForce(Vector2.right * acceleration * Time.deltaTime);
         }
         if (Input.GetKey(left) && !(Input.GetKey(up) | Input.GetKey(down)))
         {
-            rb.AddForce(-transform.right * acceleration * Time.deltaTime);
+            rb.AddForce(-Vector2.right * acceleration * Time.deltaTime);
         }
        
         if (Input.GetKey(powerupUse) && heldPowerup[0] != PowerupType.NONE)
