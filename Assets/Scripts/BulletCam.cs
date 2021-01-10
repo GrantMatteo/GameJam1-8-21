@@ -18,7 +18,6 @@ public class BulletCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("upating");
         if (bullet == null)
         {
             return;
