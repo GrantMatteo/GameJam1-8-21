@@ -18,9 +18,15 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode powerupUse = KeyCode.Space;
+
     [Header("Player Params")]
     public float health = 6f;
     public Text healthbar;
+    PowerupType[] heldPowerup = new PowerupType[1];
+    PowerupType activePowerup;
+    public GameObject currentInterObj = null;
+    public InteractionObject currentInterObjScript = null;
+    public Inventory inventory;
 
 
 
@@ -29,9 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed = 10;
 
 
-    PowerupType[] heldPowerup = new PowerupType[1];
 
-    PowerupType activePowerup;
 
     // Start is called before the first frame update
     void Start()
@@ -85,9 +89,12 @@ public class PlayerMovement : MonoBehaviour
             usePowerup();
         }
         healthbar.text = "Health: " + health.ToString();
+
+       
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //changing this to public to see if it changes anything with interactionobject
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
@@ -100,7 +107,58 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log(heldPowerup[0]);
             }
         }
+        if(collision.CompareTag("InteractionObject"))
+        {
+            print(collision.name);
+            currentInterObj = collision.gameObject;
+            currentInterObjScript = currentInterObj.GetComponent<InteractionObject>(); 
+        }
+
+        //interaction with InteractionObjects;
+        if (collision.gameObject.tag == "InteractionObject" && currentInterObj)
+        {
+            //check if you can put it in inventory
+            if (currentInterObjScript.inventory)
+            {
+                inventory.AddItem(currentInterObj);
+                print("item added to inventory");
+            }
+            if (currentInterObjScript.openable)
+            {
+                if (currentInterObjScript.locked)
+                {
+                    //check to see if we have the object needed
+                    //search inventory, if found, unlock object
+                    if (inventory.FindItem(currentInterObjScript.itemNeeded))
+                    {
+                        //we found item needed
+                        currentInterObjScript.locked = false;
+                        print(currentInterObj.name + " was unlocked");
+                    }
+                    else
+                    {
+                        print(currentInterObj.name + " was not unlocked");
+                    }
+
+                }
+                else
+                {
+                    print(currentInterObj.name + " is unlocked");
+                    currentInterObjScript.Open();
+                }
+            }
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("InteractionObject"))
+        {
+            print(collision.name + "leaving ");
+            currentInterObj = null;
+        }
+    }
+
     void usePowerup()
     {
         switch (heldPowerup[0])
