@@ -141,9 +141,9 @@ public class PlayerMovement : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            Die();
+            //Die();
             //SceneManager.LoadScene("Menu");
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
     }
 }
