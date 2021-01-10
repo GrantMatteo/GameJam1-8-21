@@ -23,7 +23,6 @@ public class ViewBox : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll)
     {
         inCount++;
-        Debug.Log("enc view");
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
             GameObject child= this.gameObject.transform.GetChild(i).gameObject;
@@ -35,7 +34,6 @@ public class ViewBox : MonoBehaviour
         inCount--;
         if (inCount == 0)
         {
-            Debug.Log("ex view " + this.gameObject.name);
             for (int i = 0; i < this.gameObject.transform.childCount; i++)
             {
                 GameObject child = this.gameObject.transform.GetChild(i).gameObject;
