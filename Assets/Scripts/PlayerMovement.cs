@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
-        //animator.SetFloat("Horizontal", Input.GetAxisRaw(Input.get.sqrMagnitude));
         if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
             rb.AddForce(transform.up * acceleration);
@@ -148,3 +147,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+

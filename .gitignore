@@ -69,3 +69,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Dependency tracker that I think unity recalculates all the time anyway?
+# Hopefully this doesn't break everything
+Packages/packages-lock.json
