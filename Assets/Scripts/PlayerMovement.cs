@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject bearTrap;
     public GameObject screenClearer;
+    public Animator animator;
 
     [Header("Controls")]
     public KeyCode up = KeyCode.W;
@@ -42,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
+        animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
+        //animator.SetFloat("Horizontal", Input.GetAxisRaw(Input.get.sqrMagnitude));
         if (Input.GetKey(up) && !(Input.GetKey(left) | Input.GetKey(right)))
         {
             rb.AddForce(transform.up * acceleration);
