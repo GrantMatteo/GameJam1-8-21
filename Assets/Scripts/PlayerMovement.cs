@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case PowerupType.MASSIVE_BULLET:
                 activePowerup = heldPowerup[0];
+                this.gameObject.SendMessage("ChangeNextBullet", activePowerup);
                 break;
             case PowerupType.CLEAR_SCREEN:
                 clearScreen();
@@ -114,8 +115,8 @@ public class PlayerMovement : MonoBehaviour
             case PowerupType.BEAR_TRAP:
                 throwBearTrap();
                 break;
-            
         }
+        heldPowerup[0] = PowerupType.NONE;
     }
     void clearScreen()
     {
@@ -138,8 +139,8 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            SceneManager.LoadScene("Menu");
-            //Time.timeScale = 0;
+            //SceneManager.LoadScene("Menu");
+            Time.timeScale = 0;
         }
     }
 }
