@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &4181317229205165844
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183,6 +183,8 @@ MonoBehaviour:
   enemyBulletSpeed: 4
   enemyBullet: {fileID: 8268497144257685685, guid: aee41aa173e6e3848b18f48d400d0d82,
     type: 3}
+  distanceForShooting: 6
+  distanceFromPlayer: 3
   maxAmmo: 2
   maxCooldown: 50
 --- !u!114 &4218351526172083061

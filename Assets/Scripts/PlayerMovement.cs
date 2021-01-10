@@ -102,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Damage(1);
+            print(collision.gameObject);
+            print(health);
         } else if (collision.gameObject.tag == "Powerup")
         {
             if (heldPowerup[0] == PowerupType.NONE)
