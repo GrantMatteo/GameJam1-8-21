@@ -86,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Bump");
         if (collision.gameObject.tag == "Enemy")
         {
             Damage(1);
