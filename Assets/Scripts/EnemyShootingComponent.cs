@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyShootingComponent : MonoBehaviour {
 
-    public float enemyBulletSpeed = 3;
+    public float enemyBulletSpeed;
     public GameObject enemyBullet;
 
-    public int maxAmmo = 2;
-    public int maxCooldown = 1000; // update cycles between shots
+    public int distanceForShooting = 6;
+    public int distanceFromPlayer = 3;
+    public int maxAmmo;
+    public int maxCooldown; // update cycles between shots
     private GameObject player;
     private bool activeShooter = false;
     private int ammo;
