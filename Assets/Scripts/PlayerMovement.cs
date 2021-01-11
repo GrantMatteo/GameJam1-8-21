@@ -94,18 +94,24 @@ public class PlayerMovement : MonoBehaviour
             usePowerup();
         }
         healthbar.text = "Health: " + health.ToString();
-
+        if (invulnerable && Time.time - invulnTimer > invulnDuration)
+        {
+            invulnerable = false;
+        } else if (!invulnerable && inEnemies > 0)
+        {
+            Damage(1);
+        }
        
     }
     public GameObject powerupDisplay;
+    int inEnemies = 0;
     //changing this to public to see if it changes anything with interactionobject
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
             Damage(1);
-            print(collision.gameObject);
-            print(health);
+            inEnemies++;
         } else if (collision.gameObject.tag == "Powerup")
         {
             if (heldPowerup[0] == PowerupType.NONE)
@@ -159,9 +165,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            inEnemies--;
+        }
         if (collision.CompareTag("InteractionObject"))
         {
-            print(collision.name + "leaving ");
             currentInterObj = null;
         }
     }
@@ -206,16 +215,23 @@ public class PlayerMovement : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-
+    float invulnTimer;
+    public float invulnDuration = 1;
+    bool invulnerable = false;
     void Damage(float amount)
     {
-        health -= amount;
-        //animator.SetTrigger("Hurt");
-        if (health <= 0)
+        if (!invulnerable)
         {
-            //Die();
-            //SceneManager.LoadScene("Menu");
-            //Time.timeScale = 0;
+            invulnerable = true;
+            invulnTimer = Time.time;
+            health -= amount;
+            //animator.SetTrigger("Hurt");
+            if (health <= 0)
+            {
+                //Die();
+                //SceneManager.LoadScene("Menu");
+                //Time.timeScale = 0;
+            }
         }
     }
 }
