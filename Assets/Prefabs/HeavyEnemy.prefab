@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a139f6bd307174db9a093a5682c53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followStrength: 300
+  followStrength: 100
   maxSpeed: 1
   maxMaxSpeed: 150
   chargeStength: 1000

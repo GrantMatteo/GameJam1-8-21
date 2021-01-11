@@ -180,11 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdb057a8571de040a97c5657eebb59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBulletSpeed: 4
+  enemyBulletSpeed: 3
   enemyBullet: {fileID: 8268497144257685685, guid: aee41aa173e6e3848b18f48d400d0d82,
     type: 3}
-  distanceForShooting: 6
-  distanceFromPlayer: 3
+  distanceForShooting: 5
+  distanceFromPlayer: 4
   maxAmmo: 2
   maxCooldown: 50
 --- !u!114 &4218351526172083061
