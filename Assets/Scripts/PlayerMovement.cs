@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject bearTrap;
     public GameObject screenClearer;
     Animator animator;
+    public GameObject bossHealthbar;
 
     [Header("Controls")]
     public KeyCode up = KeyCode.W;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bossHealthbar.SendMessage("SetSize", 1);
         heldPowerup[0] = PowerupType.NONE;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -49,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dead && !playerDeathSound.isPlaying)
+        {
+            SceneManager.LoadScene("Menu");
+        }
         float acceleration = this.acceleration * (firing ? .5F : 1F);  
         //animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
         //animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
@@ -103,7 +109,6 @@ public class PlayerMovement : MonoBehaviour
         }
        
     }
-    
     int inEnemies = 0;
     //changing this to public to see if it changes anything with interactionobject
     void OnTriggerEnter2D(Collider2D collision)
@@ -220,11 +225,11 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(bearTrap, this.transform.position, this.transform.rotation);
 
     }
-
+    bool dead = false;
     public AudioSource playerDeathSound, playerHurtSound;
     public void Die()
     {
-        SceneManager.LoadScene("Menu");
+        dead = true;
         Time.timeScale = 0;
         GameObject.Find("MusicManager").GetComponent<AudioSource>().Stop();
         playerDeathSound.Play();
