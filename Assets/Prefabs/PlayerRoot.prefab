@@ -545,6 +545,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   acceleration: 20000
   maxSpeed: 10
+  powerupDisplay: {fileID: 0}
+  invulnDuration: 1
 --- !u!50 &4089794467225524905
 Rigidbody2D:
   serializedVersion: 4
@@ -581,6 +583,22 @@ MonoBehaviour:
   bulletSpeed: 10
   bullet: {fileID: 8268497144257685685, guid: eb2ca303a9474e24e87768313638268f, type: 3}
   bulletCam: {fileID: 0}
+  telebackUnlocked: 0
+  stunUnlocked: 0
+  chargeShotUnlocked: 0
+  bulletPowerBar: {fileID: 0}
+  bulletHalo: {fileID: 0}
+  CHARGE_INIT_TIME: 0.05
+  CHARGE_MAX_TIME: 3.05
+  TELEBACK_TIME: 1
+  recoilAmount: 100
+  bulletPowerContainer: {fileID: 0}
+  telebackProjectile: {fileID: 0}
+  telebackPlatform: {fileID: 0}
+  telebackProjSpeed: 0
+  stunZonePrefab: {fileID: 0}
+  teleTimerLength: 1
+  teleTimered: 0
 --- !u!58 &4089794467225524907
 CircleCollider2D:
   m_ObjectHideFlags: 0
