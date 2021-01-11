@@ -10,7 +10,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletCam;
     private Transform playerTransform;
     private Rigidbody2D playerRB;
-
+    public bool telebackUnlocked = false, stunUnlocked = false, chargeShotUnlocked = false;
 
     PowerupType bulletPowerup;
     bool hasBullet = true; //do we have the bullet on us?
@@ -18,7 +18,7 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         playerTransform = GetComponent<Transform>();
         playerRB = GetComponent<Rigidbody2D>();
     }
@@ -38,49 +38,63 @@ public class Shooting : MonoBehaviour
             telebackCapable = false;
             Destroy(telebackPlatformInstance);
         }
-        if (Input.GetMouseButtonDown(0) && hasBullet)
+        if (chargeShotUnlocked)
         {
-            firing = true;
-            fireTimer = Time.time;
-            hasBullet = false;
-        }
-        if (firing && Time.time - fireTimer > CHARGE_INIT_TIME)
-        {
-            positionLocked = true;
-            float f = (Time.time - fireTimer) / CHARGE_MAX_TIME;
-            bulletPowerBar.SendMessage("SetSize",f);
-            this.gameObject.SendMessage("SetFiring", true);
-        }
-        if (firing && (Input.GetMouseButtonUp(0) || Time.time - fireTimer >= CHARGE_MAX_TIME))
-        {
-            this.gameObject.SendMessage("SetFiring", false);
-
-            bulletPowerBar.SendMessage("SetSize", 0, 0);
-            firing = false;
-            if (positionLocked)
+            if (Input.GetMouseButtonDown(0) && hasBullet)
             {
-                bigFireTowardsMouse(Mathf.Min((Time.time - fireTimer) / CHARGE_MAX_TIME, 1));
+                firing = true;
+                fireTimer = Time.time;
+                hasBullet = false;
             }
-            else
+            if (firing && Time.time - fireTimer > CHARGE_INIT_TIME)
+            {
+                positionLocked = true;
+                float f = (Time.time - fireTimer) / CHARGE_MAX_TIME;
+                bulletPowerBar.SendMessage("SetSize", f);
+                this.gameObject.SendMessage("SetFiring", true);
+            }
+            if (firing && (Input.GetMouseButtonUp(0) || Time.time - fireTimer >= CHARGE_MAX_TIME))
+            {
+                this.gameObject.SendMessage("SetFiring", false);
+
+                bulletPowerBar.SendMessage("SetSize", 0, 0);
+                firing = false;
+                if (positionLocked)
+                {
+                    bigFireTowardsMouse(Mathf.Min((Time.time - fireTimer) / CHARGE_MAX_TIME, 1));
+                }
+                else
+                {
+                    basicFireTowardsMouse();
+                }
+                positionLocked = false;
+            }
+            bulletPowerBar.SetActive(true);
+        }
+        else
+        {
+            bulletPowerBar.SetActive(false);
+            if (Input.GetMouseButtonDown(0) && hasBullet)
             {
                 basicFireTowardsMouse();
+                hasBullet = false;
             }
-            positionLocked = false;
+
         }
         if (!telebackCapable && Input.GetMouseButtonDown(1) && !hasBullet)
         {
             teleportToBullet();
             hasBullet = true;
         }
-        else if (telebackCapable && Input.GetMouseButtonDown(1))
+        else if (telebackUnlocked && telebackCapable && Input.GetMouseButtonDown(1))
         {
             teleBack();
         }
-        if (!firing)
+        if (!firing && chargeShotUnlocked)
         {
             bulletPowerBar.SendMessage("SetSize", 0, 0);
         }
-        if (telebackProjectileInstance && (telebackProjectileInstance.transform.position - telebackPos).sqrMagnitude < .1)
+        if (telebackUnlocked && telebackProjectileInstance && (telebackProjectileInstance.transform.position - telebackPos).sqrMagnitude < .1)
         {
             Destroy(telebackProjectileInstance);
         }
@@ -166,19 +180,26 @@ public class Shooting : MonoBehaviour
     public GameObject stunZonePrefab;
     void teleportToBullet()
     {
-        if (telebackPlatformInstance)
+        if (telebackUnlocked)
         {
-            Destroy(telebackPlatformInstance);
+            if (telebackPlatformInstance)
+            {
+                Destroy(telebackPlatformInstance);
+            }
+            telebackPlatformInstance = Instantiate(telebackPlatform, playerTransform.position, playerTransform.rotation);
+            telebackTimer = Time.time;
+            telebackPos = this.gameObject.transform.position;
+            telebackCapable = true;
         }
-        telebackPlatformInstance = Instantiate(telebackPlatform, playerTransform.position, playerTransform.rotation);
-        telebackTimer = Time.time;
-        telebackPos = this.gameObject.transform.position;
-        telebackCapable = true;
         bulletCam.SendMessage("Deactiv");
         playerTransform.position = bulletInstance.GetComponent<Transform>().position;
         playerRB.velocity = bulletInstance.GetComponent<Rigidbody2D>().velocity;
-        GameObject stunZoneInstance = Instantiate(stunZonePrefab, playerTransform.position, playerTransform.rotation);
-        stunZoneInstance.transform.position += new Vector3(0, 0, 10);
+
+        if (stunUnlocked)
+        {
+            GameObject stunZoneInstance = Instantiate(stunZonePrefab, playerTransform.position, playerTransform.rotation);
+            stunZoneInstance.transform.position += new Vector3(0, 0, 10);
+        }
         Destroy(bulletInstance);
     }
 }

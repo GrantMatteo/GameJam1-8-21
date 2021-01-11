@@ -210,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
     void Damage(float amount)
     {
         health -= amount;
-        animator.SetTrigger("Hurt");
+        //animator.SetTrigger("Hurt");
         if (health <= 0)
         {
             //Die();
