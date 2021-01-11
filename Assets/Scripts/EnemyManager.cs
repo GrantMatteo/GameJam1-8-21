@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     public float delayDec = 5;
     public float minDelay = 1;
     public float spawnDist = 10;
-
+    public GameObject player;
     private float lastTime;
     private float curIntensity, curDelay;
     // Start is called before the first frame update
@@ -40,6 +40,7 @@ public class EnemyManager : MonoBehaviour
     }
     void SpawnWave() 
     {
+        Vector3 pVel = playerTransform.gameObject.GetComponent<Rigidbody2D>().velocity;
         List<GameObject> waveEnemies = new List<GameObject>();
         for (int i = 0; i < curIntensity;)
         {
@@ -53,6 +54,9 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject o in waveEnemies)
         {
             float rotAngle = Random.Range(0, 2 * Mathf.PI);
+            while (Vector3.Angle(pVel, new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), pVel.z)) > 90){
+                rotAngle = Random.Range(0, 2 * Mathf.PI);
+            }
             Instantiate(o, new Vector2(playerTransform.position.x, playerTransform.position.y) + spawnDist*(new Vector2(Mathf.Sin(rotAngle), Mathf.Cos(rotAngle))), transform.rotation);
         }
         curIntensity += intensityInc;
