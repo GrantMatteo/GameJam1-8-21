@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b516501d75a754215a669ea7f7f32495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 11
   pointValue: 200
   diesOnContact: 0
 --- !u!50 &7355802067085872887

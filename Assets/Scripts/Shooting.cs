@@ -13,7 +13,7 @@ public class Shooting : MonoBehaviour
     public bool telebackUnlocked = false, stunUnlocked = false, chargeShotUnlocked = false;
 
     PowerupType bulletPowerup;
-    bool hasBullet = true; //do we have the bullet on us?
+    public bool hasBullet = true; //do we have the bullet on us?
     private GameObject bulletInstance;
     // Start is called before the first frame update
     void Start()

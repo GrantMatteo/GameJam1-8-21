@@ -30,6 +30,8 @@ public class FollowPlayer : MonoBehaviour {
     }
     public bool faceMove = false;
     public float faceOffset = 180;
+    public float minDist = 30F;
+    public float offScreenBoost = 5;
     private void Update() {
         if (stunned)
         {
@@ -57,6 +59,10 @@ public class FollowPlayer : MonoBehaviour {
                 shootingComponent.SendMessage(nameof(EnemyShootingComponent.setActiveShooter), false);
             }
             
+        }
+        if (dist > minDist)
+        {
+            force *= dist / minDist * offScreenBoost;
         }
         rb.AddForce(force);
         if (faceMove)
