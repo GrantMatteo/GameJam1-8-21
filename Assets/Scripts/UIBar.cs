@@ -22,7 +22,6 @@ public class UIBar : MonoBehaviour
     void SetSize(float val)
     {
         i.enabled = (val != 0);
-        //Debug.Log("hello there " + val);
         r.sizeDelta = new Vector2(val * 160, r.sizeDelta.y);
     }
 }
