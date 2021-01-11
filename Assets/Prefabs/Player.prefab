@@ -115,7 +115,7 @@ MonoBehaviour:
   currentInterObj: {fileID: 0}
   currentInterObjScript: {fileID: 0}
   inventory: {fileID: 0}
-  acceleration: 20000
+  acceleration: 12000
   maxSpeed: 10
 --- !u!50 &3384778093867903943
 Rigidbody2D:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4454fd4de4ff1624596b21d02756dc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
+  bulletSpeed: 4
   bullet: {fileID: 8268497144257685685, guid: eb2ca303a9474e24e87768313638268f, type: 3}
   bulletCam: {fileID: 0}
 --- !u!95 &3384778093867903945
