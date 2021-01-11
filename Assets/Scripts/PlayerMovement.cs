@@ -146,8 +146,12 @@ public class PlayerMovement : MonoBehaviour
                     tutText.pushToMin(8);
                     this.GetComponent<Shooting>().stunUnlocked = true;
                     GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 2;
-                    GameObject.Find("Boss").GetComponent<Boss>().vulnerable = true;
                     break;
+                case PowerupType.INVINC:
+                    GameObject.Find("Boss").GetComponent<Boss>().vulnerable = true;
+                    tutText.pushToMin(9);
+                    break;
+
             }
         }
         if(collision.CompareTag("InteractionObject"))

@@ -5,6 +5,9 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     public AudioSource powerup, macguffin;
+    public GameObject musicController;
+    public GameObject[] destroyedWalls;
+    public GameObject boss;
     public PowerupType powerupType;
     // Start is called before the first frame update
     void Start()
@@ -19,8 +22,16 @@ public class Powerup : MonoBehaviour
     }
     void Pickup(PowerupType[] pType)
     {
+        if (musicController)
+        {
+            musicController.SendMessage("Pause");
+        }
         pType[0] = powerupType;
-        Destroy(this.gameObject);
+        boss.SetActive(true);
+        foreach (GameObject o in destroyedWalls)
+        {
+            Destroy(o);
+        }
         if (powerupType < PowerupType.MASSIVE_BULLET)
         {
             powerup.Play();
@@ -28,9 +39,10 @@ public class Powerup : MonoBehaviour
         {
             macguffin.Play();
         }
+        Destroy(this.gameObject);
     }
 }
 public enum PowerupType
 {
-    NONE, HEALTH, CLEAR_SCREEN, BEAR_TRAP, MASSIVE_BULLET, TELEBACK, CHARGE_SHOT, STUN
+    NONE, HEALTH, CLEAR_SCREEN, BEAR_TRAP, MASSIVE_BULLET, TELEBACK, CHARGE_SHOT, STUN, GREEN_KEY, INVINC
 }
