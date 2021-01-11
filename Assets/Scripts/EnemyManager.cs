@@ -8,6 +8,8 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> enemies;
     public List<int> enemyStrengths;
     public Transform playerTransform;
+    public int maxEnemyCount;
+    public int enemyCount;
 
     [Header("Wave settings")]
     public float startingIntensity = 5;
@@ -47,9 +49,10 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < curIntensity;)
         {
             int rand = Random.Range(0, currentGameState+1);
-            if (enemyStrengths[rand] <= curIntensity - i)
+            if (enemyStrengths[rand] <= curIntensity - i && enemyCount < maxEnemyCount)
             {
                 waveEnemies.Add(enemies[rand]);
+                enemyCount++;
                 i += enemyStrengths[rand];
             }
         }
@@ -67,6 +70,10 @@ public class EnemyManager : MonoBehaviour
         curDelay -= delayDec;
         curDelay = curDelay < minDelay ? minDelay : curDelay;
         curIntensity = curIntensity > maxIntensity ? maxIntensity : curIntensity;
+    }
+
+    public void decrementEnemyCount() {
+        enemyCount--; // I'm 4L gang n if you reach for my chain then a * gonna die in this bitch
     }
 
 }
