@@ -5,8 +5,14 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     public float health = 100f;
+    float maxHealth;
     public float pointValue = 100;
-
+    public bool vulnerable = false;
+    public GameObject healthBar;
+    void Start()
+    {
+        maxHealth = health;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -36,10 +42,14 @@ public class Boss : MonoBehaviour
     }
     void Damage(float amount)
     {
-        health -= amount;
-        if (health <= 0)
+        if (vulnerable)
         {
-            Die();
+            health -= amount;
+            healthBar.SendMessage("SetSize", health / maxHealth);
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
 }

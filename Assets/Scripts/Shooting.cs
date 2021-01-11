@@ -104,9 +104,10 @@ public class Shooting : MonoBehaviour
             bulletPowerBar.SendMessage("SetSize", 0, 0);
         }
     }
-
+    public TutorialText tutText;
     void basicFireTowardsMouse()
     {
+        tutText.pushToMin(2);
         fireSound.Play();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 velDirection = mousePos - new Vector2(playerTransform.position.x, playerTransform.position.y);
@@ -130,6 +131,7 @@ public class Shooting : MonoBehaviour
     }
     void bigFireTowardsMouse(float intensity)
     {
+        tutText.pushToMin(7);
         shotChargeSound.Stop();
         fireSound.Play();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -173,6 +175,7 @@ public class Shooting : MonoBehaviour
     Vector3 telebackPos;
     void teleBack()
     {
+        tutText.pushToMin(5);
         telebackSound.Play();
         if (telebackProjectileInstance)
         {
@@ -197,6 +200,7 @@ public class Shooting : MonoBehaviour
     public bool teleTimered=false;
     void teleportToBullet()
     {
+        tutText.pushToMin(3);
         teleSound.Play();
         teleTimered = true; 
         teleTimer = Time.time;
