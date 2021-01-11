@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    
+
 
     private GameObject child;
     // Start is called before the first frame update
@@ -19,6 +19,7 @@ public class bullet : MonoBehaviour
     {
         
     }
+
     //we'll probably need some Collision events with bullets to increase score and stuff
     private void OnCollisionEnter2D(Collision2D collision)
     {

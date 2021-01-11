@@ -16,7 +16,30 @@ public class FollowPlayer : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         shootingComponent = this.gameObject.GetComponent<EnemyShootingComponent>();
     }
+    bool stunned;
+    float stunTimer;
+    public float stunDuration;
+    void Stun(float duration)
+    {
+        if (!stunned)
+        {
+            stunDuration = duration;
+            stunTimer = Time.time;
+            stunned = true;
+        }
+    }
     private void Update() {
+        if (stunned)
+        {
+            if (Time.time - stunTimer > stunDuration)
+            {
+                stunned = false;
+            } else
+            {
+                rb.velocity = new Vector3(0, 0, 0);
+                return;
+            }
+        }
         Vector2 towardPlayer = player.transform.position - transform.position;
         Vector2 steering = towardPlayer.normalized;
         Vector2 force = steering * followStrength * Time.deltaTime;

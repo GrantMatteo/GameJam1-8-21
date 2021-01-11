@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         heldPowerup[0] = PowerupType.NONE;
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -210,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
     void Damage(float amount)
     {
         health -= amount;
+        animator.SetTrigger("Hurt");
         if (health <= 0)
         {
             //Die();

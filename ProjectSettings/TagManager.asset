@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Macguffin
   - InteractionObject
+  - Stun Zone
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - CameraBox
   - WorldBox
   - Macguffin
-  - 
+  - Non-Colliding Enemy
   - 
   - 
   - 
