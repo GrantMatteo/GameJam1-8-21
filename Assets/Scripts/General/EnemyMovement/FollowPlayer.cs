@@ -28,6 +28,8 @@ public class FollowPlayer : MonoBehaviour {
             stunned = true;
         }
     }
+    public bool faceMove = false;
+    public float faceOffset = 180;
     private void Update() {
         if (stunned)
         {
@@ -57,7 +59,10 @@ public class FollowPlayer : MonoBehaviour {
             
         }
         rb.AddForce(force);
-
+        if (faceMove)
+        {
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, faceOffset + (Mathf.Sign(towardPlayer.y)) * Vector3.Angle(new Vector3(1, 0, 0), new Vector3(towardPlayer.x, towardPlayer.y, 0)));
+        }
         followStrength = followStrength * maxSpeed;
 
     }
