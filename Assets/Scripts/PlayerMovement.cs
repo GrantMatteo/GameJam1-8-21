@@ -47,14 +47,19 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-
+    float deadTimer = 0;
     // Update is called once per frame
     void Update()
     {
-        if (dead && !playerDeathSound.isPlaying)
+        Debug.Log("Dead Clock" +(Time.time - deadTimer));
+        if (dead && Time.time - deadTimer > 5)
         {
             SceneManager.LoadScene("Menu");
+        } else if (dead)
+        {
+            return;
         }
+
         float acceleration = this.acceleration * (firing ? .5F : 1F);  
         //animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
         //animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
@@ -99,6 +104,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //usePowerup();
         }
+        if (rb.velocity.sqrMagnitude > 0)
+        {
+            tutText.pushToMin(1);
+        }
         healthbar.text = "Health: " + health.ToString();
         if (invulnerable && Time.time - invulnTimer > invulnDuration)
         {
@@ -109,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         }
        
     }
+    public TutorialText tutText;
     int inEnemies = 0;
     //changing this to public to see if it changes anything with interactionobject
     void OnTriggerEnter2D(Collider2D collision)
@@ -123,16 +133,20 @@ public class PlayerMovement : MonoBehaviour
             switch (heldPowerup[0])
             {
                 case PowerupType.TELEBACK:
+                    tutText.pushToMin(4);
                     this.GetComponent<Shooting>().telebackUnlocked = true;
                     GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 1;                
                     break;
                 case PowerupType.CHARGE_SHOT:
+                    tutText.pushToMin(6);
                     this.GetComponent<Shooting>().chargeShotUnlocked = true;
                     GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 2;
                     break;
                 case PowerupType.STUN:
+                    tutText.pushToMin(8);
                     this.GetComponent<Shooting>().stunUnlocked = true;
                     GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 2;
+                    GameObject.Find("Boss").GetComponent<Boss>().vulnerable = true;
                     break;
             }
         }
@@ -230,10 +244,9 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         dead = true;
-        Time.timeScale = 0;
+        deadTimer = Time.time;
         GameObject.Find("MusicManager").GetComponent<AudioSource>().Stop();
         playerDeathSound.Play();
-        this.gameObject.SetActive(false);
     }
     float invulnTimer;
     public float invulnDuration = 1;
