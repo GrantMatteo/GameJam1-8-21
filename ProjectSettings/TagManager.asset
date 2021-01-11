@@ -13,6 +13,9 @@ TagManager:
   - Macguffin
   - InteractionObject
   - Stun Zone
+  - Green Gate
+  - Red Gate
+  - Blue Gate
   layers:
   - Default
   - TransparentFX
