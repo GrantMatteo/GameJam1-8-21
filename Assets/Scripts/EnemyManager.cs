@@ -56,8 +56,8 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject o in waveEnemies)
         {
             float rotAngle = Random.Range(0, 2 * Mathf.PI);
-            Debug.Log("vel " + pVel);
-            Debug.Log("VAL " + Vector3.Angle(pVel, new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), pVel.z)));
+            //Debug.Log("vel " + pVel);
+            //Debug.Log("VAL " + Vector3.Angle(pVel, new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), pVel.z)));
             if (Vector3.Angle(pVel, new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), pVel.z)) > 90){
                 rotAngle = Random.Range(0, 2 * Mathf.PI);
             }

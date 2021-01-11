@@ -31,6 +31,7 @@ public class Shooting : MonoBehaviour
     public float TELEBACK_TIME = 1F;
     public float recoilAmount = 100;
     public GameObject bulletPowerContainer;
+    public AudioSource teleSound, fireSound, telebackSound, shotChargeSound, noBulletSound, reloadSound;
     // Update is called once per frame
     void Update()
     {
@@ -41,6 +42,7 @@ public class Shooting : MonoBehaviour
         }
         if (teleTimered && Time.time - teleTimer > teleTimerLength)
         {
+            reloadSound.Play();
             teleTimered = false;
         }
         if (chargeShotUnlocked)
@@ -53,6 +55,7 @@ public class Shooting : MonoBehaviour
             }
             if (firing && Time.time - fireTimer > CHARGE_INIT_TIME)
             {
+                shotChargeSound.Play();
                 positionLocked = true;
                 float f = (Time.time - fireTimer) / CHARGE_MAX_TIME;
                 bulletPowerBar.SendMessage("SetSize", f);
@@ -104,6 +107,7 @@ public class Shooting : MonoBehaviour
 
     void basicFireTowardsMouse()
     {
+        fireSound.Play();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 velDirection = mousePos - new Vector2(playerTransform.position.x, playerTransform.position.y);
         velDirection.Normalize();
@@ -126,6 +130,8 @@ public class Shooting : MonoBehaviour
     }
     void bigFireTowardsMouse(float intensity)
     {
+        shotChargeSound.Stop();
+        fireSound.Play();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 velDirection = mousePos - new Vector2(playerTransform.position.x, playerTransform.position.y);
         velDirection.Normalize();
@@ -167,6 +173,7 @@ public class Shooting : MonoBehaviour
     Vector3 telebackPos;
     void teleBack()
     {
+        telebackSound.Play();
         if (telebackProjectileInstance)
         {
             Destroy(telebackProjectileInstance);
@@ -190,6 +197,7 @@ public class Shooting : MonoBehaviour
     public bool teleTimered=false;
     void teleportToBullet()
     {
+        teleSound.Play();
         teleTimered = true; 
         teleTimer = Time.time;
 

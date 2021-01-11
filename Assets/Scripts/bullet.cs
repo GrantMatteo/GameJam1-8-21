@@ -19,13 +19,31 @@ public class bullet : MonoBehaviour
     {
         
     }
-
+    public AudioSource hitSound, ricochetSound;
     //we'll probably need some Collision events with bullets to increase score and stuff
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-
+        Debug.Log("awefawefawefawfeawefawef");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            hitSound.Play();
+        } else if (collision.gameObject.tag == "Wall")
+        {
+            ricochetSound.Play();
+        }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            hitSound.Play();
+        }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            ricochetSound.Play();
+        }
+    }
+void OnCollisionExit2D(Collision2D collision)
     {
 
     }

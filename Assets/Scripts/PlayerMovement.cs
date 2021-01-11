@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
        
         if (Input.GetKey(powerupUse) && heldPowerup[0] != PowerupType.NONE)
         {
-            usePowerup();
+            //usePowerup();
         }
         healthbar.text = "Health: " + health.ToString();
         if (invulnerable && Time.time - invulnTimer > invulnDuration)
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         }
        
     }
-    public GameObject powerupDisplay;
+    
     int inEnemies = 0;
     //changing this to public to see if it changes anything with interactionobject
     void OnTriggerEnter2D(Collider2D collision)
@@ -114,15 +114,25 @@ public class PlayerMovement : MonoBehaviour
             inEnemies++;
         } else if (collision.gameObject.tag == "Powerup")
         {
-            if (heldPowerup[0] == PowerupType.NONE)
+            collision.gameObject.SendMessage("Pickup", heldPowerup);
+            switch (heldPowerup[0])
             {
-                collision.gameObject.SendMessage("Pickup", heldPowerup);
-                powerupDisplay.SendMessage("SetImage", heldPowerup[0]);
+                case PowerupType.TELEBACK:
+                    this.GetComponent<Shooting>().telebackUnlocked = true;
+                    GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 1;                
+                    break;
+                case PowerupType.CHARGE_SHOT:
+                    this.GetComponent<Shooting>().chargeShotUnlocked = true;
+                    GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 2;
+                    break;
+                case PowerupType.STUN:
+                    this.GetComponent<Shooting>().stunUnlocked = true;
+                    GameObject.Find("EnemyManager").GetComponent<EnemyManager>().currentGameState = 2;
+                    break;
             }
         }
         if(collision.CompareTag("InteractionObject"))
         {
-            print(collision.name);
             currentInterObj = collision.gameObject;
             currentInterObjScript = currentInterObj.GetComponent<InteractionObject>(); 
         }
@@ -175,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void usePowerup()
+   /* void usePowerup()
     {
         switch (heldPowerup[0])
         {
@@ -193,9 +203,8 @@ public class PlayerMovement : MonoBehaviour
                 throwBearTrap();
                 break;
         }
-        powerupDisplay.SendMessage("SetImage", PowerupType.NONE);
         heldPowerup[0] = PowerupType.NONE;
-    }
+    }*/
     bool firing = false;
     void SetFiring(bool fi)
     {
@@ -211,8 +220,14 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(bearTrap, this.transform.position, this.transform.rotation);
 
     }
+
+    public AudioSource playerDeathSound, playerHurtSound;
     public void Die()
     {
+        SceneManager.LoadScene("Menu");
+        Time.timeScale = 0;
+        GameObject.Find("MusicManager").GetComponent<AudioSource>().Stop();
+        playerDeathSound.Play();
         this.gameObject.SetActive(false);
     }
     float invulnTimer;
@@ -228,9 +243,10 @@ public class PlayerMovement : MonoBehaviour
             //animator.SetTrigger("Hurt");
             if (health <= 0)
             {
-                //Die();
-                //SceneManager.LoadScene("Menu");
-                //Time.timeScale = 0;
+                Die();
+            } else
+            {
+                playerHurtSound.Play();
             }
         }
     }
