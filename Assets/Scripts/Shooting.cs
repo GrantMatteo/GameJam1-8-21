@@ -100,10 +100,6 @@ public class Shooting : MonoBehaviour
         {
             bulletPowerBar.SendMessage("SetSize", 0, 0);
         }
-        if (telebackUnlocked && telebackProjectileInstance && (telebackProjectileInstance.transform.position - telebackPos).sqrMagnitude < .1)
-        {
-            Destroy(telebackProjectileInstance);
-        }
     }
 
     void basicFireTowardsMouse()
@@ -178,11 +174,13 @@ public class Shooting : MonoBehaviour
         telebackProjectileInstance = Instantiate(telebackProjectile, playerTransform.position, playerTransform.rotation);
         Vector3 retPos = this.gameObject.transform.position;
         Vector3 direction = telebackPos - retPos;
+        direction.z = 0;
         float angleFromHor = Vector3.SignedAngle(new Vector3(1, 0, 0), direction, new Vector3(0,0,1));
         telebackProjectileInstance.transform.rotation = Quaternion.Euler(0, 0, angleFromHor - 90);
         direction.Normalize();
         this.gameObject.transform.position = telebackPos;
         telebackProjectileInstance.GetComponent<Rigidbody2D>().velocity = direction * telebackProjSpeed;
+        telebackProjectileInstance.SendMessage("SetGoal", telebackPos);
         telebackCapable = false;
         Destroy(telebackPlatformInstance);
     }

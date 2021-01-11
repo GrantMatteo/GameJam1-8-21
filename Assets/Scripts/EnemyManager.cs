@@ -13,7 +13,8 @@ public class EnemyManager : MonoBehaviour
     public float startingIntensity = 5;
     public float intensityInc = 5;
     public float maxIntensity = 100;
-
+    [Tooltip("0: basic only, 1: basic & heavy, 2: all at once")]
+    public int currentGameState = 2;
     public float startingWaveDelay = 10;
     public float delayDec = 5;
     public float minDelay = 1;
@@ -45,7 +46,7 @@ public class EnemyManager : MonoBehaviour
         List<GameObject> waveEnemies = new List<GameObject>();
         for (int i = 0; i < curIntensity;)
         {
-            int rand = Random.Range(0, enemies.Count);
+            int rand = Random.Range(0, currentGameState+1);
             if (enemyStrengths[rand] <= curIntensity - i)
             {
                 waveEnemies.Add(enemies[rand]);
