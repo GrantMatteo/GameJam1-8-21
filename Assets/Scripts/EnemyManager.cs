@@ -49,7 +49,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < curIntensity;)
         {
             int rand = Random.Range(0, currentGameState+1);
-            if (enemyStrengths[rand] <= curIntensity - i && enemyCount < maxEnemyCount)
+            if (enemyStrengths[rand] <= curIntensity - i)
             {
                 waveEnemies.Add(enemies[rand]);
                 enemyCount++;

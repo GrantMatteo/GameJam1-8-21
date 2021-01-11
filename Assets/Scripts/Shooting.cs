@@ -158,7 +158,7 @@ public class Shooting : MonoBehaviour
         bulletCam.SendMessage("SetBullet", bulletInstance);
         bulletInstance.GetComponent<CircleCollider2D>().enabled = false;
         bulletInstance.GetComponent<Rigidbody2D>().velocity = velDirection * bulletSpeed;
-        bulletInstance.BroadcastMessage("SetDamage", intensity * 20);
+        bulletInstance.BroadcastMessage("SetDamage", intensity * 5);
         GetComponent<Rigidbody2D>().AddForce(intensity * (-velDirection)*recoilAmount);
     }
     void ChangeNextBullet(PowerupType type)

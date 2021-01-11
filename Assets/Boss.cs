@@ -36,9 +36,8 @@ public class Boss : MonoBehaviour
     public void Die()
     {
         GameObject scoreDisplay = GameObject.FindWithTag("Score");
-        scoreDisplay.SendMessage("addScore", pointValue);
         Destroy(this.gameObject);
-
+        Time.timeScale = 0;
     }
     void Damage(float amount)
     {
