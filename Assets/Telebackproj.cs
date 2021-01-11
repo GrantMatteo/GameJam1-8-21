@@ -19,9 +19,9 @@ public class Telebackproj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.position = new Vector3(this.transform.position.x, this.gameObject.transform.position.y, -11);
+        this.gameObject.transform.position = new Vector3(this.transform.position.x, this.gameObject.transform.position.y, 1);
         Vector3 newGoalDiff = goalLocation - this.gameObject.transform.position;
-        if (Time.time - startTime > 1 && Vector3.SqrMagnitude(goalDiff) < Vector3.SqrMagnitude(newGoalDiff))
+        if (Time.time - startTime > .1 && Vector3.SqrMagnitude(goalDiff) < Vector3.SqrMagnitude(newGoalDiff))
         {
             Destroy(this.gameObject);
         }
