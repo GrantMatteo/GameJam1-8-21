@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour
         {
             lastTime = Time.time;
             SpawnWave();
+            print(curIntensity);
         }   
     }
     void SpawnWave() 
