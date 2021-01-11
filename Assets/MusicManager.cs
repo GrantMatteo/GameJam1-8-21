@@ -16,7 +16,7 @@ public class MusicManager : MonoBehaviour
     void Pause()
     {
         timing = true;
-        music.Pause();
+        music.volume = .3F;
         timer = Time.time;
     }
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class MusicManager : MonoBehaviour
         if (timing && Time.time - timer > length)
         {
             timing = false;
-            music.UnPause();
+            music.volume = 1;
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletTrigger : MonoBehaviour
 {
     GameObject parent;
+    public AudioSource sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,17 @@ public class BulletTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if (sound && collision.gameObject.tag == "Enemy")
+        {
+            sound.Play();
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (sound & collision.gameObject.tag == "Enemy")
+        {
+            sound.Play();
+        }
     }
     private void SetParent(GameObject o)
     {
