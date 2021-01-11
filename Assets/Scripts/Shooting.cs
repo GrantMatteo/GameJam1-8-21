@@ -178,6 +178,8 @@ public class Shooting : MonoBehaviour
         telebackProjectileInstance = Instantiate(telebackProjectile, playerTransform.position, playerTransform.rotation);
         Vector3 retPos = this.gameObject.transform.position;
         Vector3 direction = telebackPos - retPos;
+        float angleFromHor = Vector3.SignedAngle(new Vector3(1, 0, 0), direction, new Vector3(0,0,1));
+        telebackProjectileInstance.transform.rotation = Quaternion.Euler(0, 0, angleFromHor - 90);
         direction.Normalize();
         this.gameObject.transform.position = telebackPos;
         telebackProjectileInstance.GetComponent<Rigidbody2D>().velocity = direction * telebackProjSpeed;
