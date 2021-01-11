@@ -31,7 +31,7 @@ public class PlayerAim : MonoBehaviour
         if (Vector2.Distance(transform.position, target) <= pointDistance)
             return;
         effector.position = target;
-        headRotator.Face(target, lockZ: false);
-        bodyRotator.Face(target, lockZ: false);
+        headRotator.transform.up = (target - (Vector2)headRotator.transform.position).normalized; //.Face(target, lockZ: false);
+        bodyRotator.transform.up = (target - (Vector2)bodyRotator.transform.position).normalized; //.Face(target, lockZ: false);
     }
 }
