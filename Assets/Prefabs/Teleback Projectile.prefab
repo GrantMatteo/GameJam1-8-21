@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 922124987169511143}
   - component: {fileID: 1467221466877887957}
   - component: {fileID: -7887258405149287742}
+  - component: {fileID: 684871157509030706}
   m_Layer: 10
   m_Name: Teleback Projectile
   m_TagString: Bullet
@@ -109,13 +110,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.060150385, y: 0.06015046}
-      - {x: -0.062797025, y: -0.03897752}
-      - {x: -0.0459522, y: -0.060672164}
-      - {x: 0.04588724, y: -0.06412031}
-      - {x: 0.0601504, y: -0.026917394}
-      - {x: 0.061473623, y: 0.036917396}
-      - {x: 0.053676687, y: 0.06412031}
+    - - {x: 0.39999998, y: 0.02}
+      - {x: 0.26999998, y: 0.14}
+      - {x: 0.19, y: 0.16}
+      - {x: -0.25, y: 0.16}
+      - {x: -0.39999998, y: 0.04}
+      - {x: -0.39999998, y: -0.16}
+      - {x: -0.29999998, y: -0.16}
+      - {x: 0.12, y: -0.04}
+      - {x: 0.35, y: -0.16}
+      - {x: 0.39999998, y: -0.16}
 --- !u!50 &1467221466877887957
 Rigidbody2D:
   serializedVersion: 4
@@ -131,7 +135,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -150,3 +154,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!114 &684871157509030706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183275213334422942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55be3ef658ccffc46a1c8c95a941e803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
