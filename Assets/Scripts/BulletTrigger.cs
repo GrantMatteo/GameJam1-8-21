@@ -17,7 +17,15 @@ public class BulletTrigger : MonoBehaviour
     //    this.transform.position = parent.transform.position;
     //    this.transform.rotation = parent.transform.rotation;
     }
-
+    public float damage = 1;
+    public float GetDamage()
+    {
+        return damage;
+    }
+    void SetDamage(float x)
+    {
+        damage = x;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
