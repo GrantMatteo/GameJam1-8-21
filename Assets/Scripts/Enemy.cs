@@ -7,6 +7,11 @@ public class Enemy : MonoBehaviour {
     public float pointValue = 1;
     public bool diesOnContact = true;
 
+    private EnemyManager manager;
+
+    void Start() {
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Bullet")
         {
@@ -28,6 +33,7 @@ public class Enemy : MonoBehaviour {
     public void Die() {
         GameObject scoreDisplay = GameObject.FindWithTag("Score");
         scoreDisplay.SendMessage("addScore", pointValue);
+        //manager.decrementEnemyCount();
         Destroy(this.gameObject);
 
     }
