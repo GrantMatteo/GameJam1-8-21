@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -112,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
         healthBar.SendMessage("SetSize", health / maxHealth);
         if (invulnerable && Time.time - invulnTimer > invulnDuration)
         {
+            animator.SetTrigger("NotHurt");
             invulnerable = false;
         } else if (!invulnerable && inEnemies > 0)
         {
@@ -264,7 +264,7 @@ public class PlayerMovement : MonoBehaviour
             invulnTimer = Time.time;
             health -= amount;
             healthBar.SendMessage("SetSize", health / maxHealth);
-            //animator.SetTrigger("Hurt");
+            animator.SetTrigger("Hurt");
             if (health <= 0)
             {
                 Die();

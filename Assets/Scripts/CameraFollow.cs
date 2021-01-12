@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour {
     private float m_OffsetZ;
     private Vector3 m_LastTargetPosition;
     private Vector3 m_CurrentVelocity;
-    private Vector3 m_LookAheadPos;
+    private Vector3 m_LookAPos;
 
 
     // Use this for initialization
