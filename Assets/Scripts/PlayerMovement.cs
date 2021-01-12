@@ -21,8 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode powerupUse = KeyCode.Space;
 
     [Header("Player Params")]
-    public float health = 6f;
-    public Text healthbar;
+    public float health = 10f;
+    public float maxHealth = 10f;
+    public GameObject healthBar;
     PowerupType[] heldPowerup = new PowerupType[1];
     PowerupType activePowerup;
     public GameObject currentInterObj = null;
@@ -107,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.sqrMagnitude > 0)
         {
             tutText.pushToMin(1);
-        }
-        healthbar.text = "Health: " + health.ToString();
+        } 
+        healthBar.SendMessage("SetSize", health / maxHealth);
         if (invulnerable && Time.time - invulnTimer > invulnDuration)
         {
             invulnerable = false;
@@ -262,6 +263,7 @@ public class PlayerMovement : MonoBehaviour
             invulnerable = true;
             invulnTimer = Time.time;
             health -= amount;
+            healthBar.SendMessage("SetSize", health / maxHealth);
             //animator.SetTrigger("Hurt");
             if (health <= 0)
             {
