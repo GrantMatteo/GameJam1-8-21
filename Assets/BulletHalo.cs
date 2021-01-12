@@ -24,8 +24,8 @@ public class BulletHalo : MonoBehaviour
         this.gameObject.transform.localScale = origScale * (1 + lifeTime * (1 - (Time.time - startTime)/lifeTime));
         if (Time.time - startTime > lifeTime)
         {
-            GameObject.Find("Player").GetComponent<Shooting>().hasBullet = true;
-            Destroy(this.gameObject.transform.parent.gameObject);
+            this.gameObject.transform.parent.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            Destroy(this.gameObject);
         }
     }
 }
